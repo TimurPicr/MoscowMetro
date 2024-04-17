@@ -1,2 +1,3 @@
 # MoscowMetro
-Project for Hackathon "Nuclear IT hack"
+Проект для хакатона "Nuclear IT hack"
+Над проектом работали: Дериглазов Тимур, Старотиторов Кирилл, Оводков Александр, Огай Владислав
