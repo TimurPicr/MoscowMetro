@@ -42,17 +42,15 @@ def get_nameof_station(stations, str): # stations = df['Станция'].unique(
         return ans
 
 
-def find_date(text_message: str, today: datetime.date) -> dict:
-    r = hors.process_phrase(text_message)
+def find_date(text_message: str, today_date: datetime.datetime) -> dict:
+    r = hors.process_phrase(text_message, now=today_date)
     res = dict()
-    match r.dates[0].type:
-        case '<DateTimeTokenType.PERIOD: 2>':
-            res['type'] = 'period'
-            a = r.dates[0].date_from.date()
-            b = r.dates[0].date_to.date()
-            res['date'] = (a, b)
-        case '<DateTimeTokenType.FIXED: 1>':
-            res['type'] = 'day'
-            a = r.dates[0].date_from.date()
-            res['date'] = a
+    a = r.dates[0].date_from.date()
+    b = r.dates[0].date_to.date()
+    if a == b:
+        res['type'] = 'day'
+        res['date'] = a
+    else:
+        res['type'] = 'period'
+        res['date'] = (a, b)
     return res
