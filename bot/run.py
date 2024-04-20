@@ -5,7 +5,7 @@ from aiogram import Bot, Dispatcher
 from bot.handlers.base_commands import router as base_commands_router
 from bot.handlers.to_nlpmodel import router as to_nlpmodel_router
 from bot.config import TOKEN
-
+import logging
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -18,4 +18,5 @@ async def main():
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     asyncio.run(main())
