@@ -2,9 +2,10 @@ from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
 
 from bot.keyboards.choose_station import create_inline_keyboard, NLPCallback
-from api.nlp_model import nlp_request, get_flow_on_date, get_flow_on_period
+from bot.nlp.nlp_model import nlp_request, get_flow_on_date, get_flow_on_period
 
 router = Router()
+
 
 @router.message(F.text)
 async def ans_message(message: Message):
@@ -22,7 +23,7 @@ async def ans_message(message: Message):
 
 
 @router.callback_query(NLPCallback.filter(F.datetype == "day"))
-async def my_callback_foo(query: CallbackQuery, callback_data: NLPCallback):
+async def flow_on_day(query: CallbackQuery, callback_data: NLPCallback):
     flow = get_flow_on_date({'station': callback_data.station,
                              'date': callback_data.date})
     await query.message.answer(f'Станция: {callback_data.station}\n'
@@ -32,9 +33,9 @@ async def my_callback_foo(query: CallbackQuery, callback_data: NLPCallback):
 
 
 @router.callback_query(NLPCallback.filter(F.datetype == "period"))
-async def one_station_choose(callback: CallbackQuery, callback_data: NLPCallback):
+async def flow_on_period(callback: CallbackQuery, callback_data: NLPCallback):
     flow = get_flow_on_period({'station': callback_data.station,
-                                                      'date': callback_data.date})
+                               'date': callback_data.date})
     await callback.message.answer(f'Станция: {callback_data.station}\n'
                                   f'Дата: {callback_data.date}\n'
                                   f'Нагрузка: {flow}')
