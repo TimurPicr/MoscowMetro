@@ -3,6 +3,8 @@
 
 Над проектом работали: Дериглазов Тимур, Старотиторов Кирилл, Оводков Александр, Огай Владислав
 
+tg: https://t.me/Moscow_Metro_bbot
+
 ## Установка
 1. pip install -r requirements.txt --no-index --find-links file:///tmp/packages
 
