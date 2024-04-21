@@ -5,7 +5,7 @@ from aiogram.filters.callback_data import CallbackData
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
-class NLPCallback(CallbackData, prefix="nlp"):
+class NLPCallback(CallbackData, prefix="models"):
     station: str | List[str]
     datetype: str
     date: datetime.date | Tuple[datetime.date]
